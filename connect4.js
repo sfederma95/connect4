@@ -11,20 +11,24 @@ const HEIGHT = 6;
 let currPlayer = 1; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
+function myPlay(sound) {
+	let audio = new Audio(sound);
+	audio.play();
+}
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
 	// TODO: set "board" to empty HEIGHT x WIDTH matrix array
-	return (board = [
-		[ null, null, null, null, null, null, null ],
-		[ null, null, null, null, null, null, null ],
-		[ null, null, null, null, null, null, null ],
-		[ null, null, null, null, null, null, null ],
-		[ null, null, null, null, null, null, null ],
-		[ null, null, null, null, null, null, null ]
-	]);
+	for (let y = 0; y < HEIGHT; y++) {
+		board.push([]);
+	}
+	board.forEach(function(subarr) {
+		for (let x = 0; x < WIDTH; x++) {
+			subarr.push(null);
+		}
+	});
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
@@ -85,7 +89,10 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-	return alert(msg) ? '' : location.reload();
+	setTimeout(function() {
+		alert(msg) ? '' : location.reload();
+	}, 3000);
+	myPlay('victory.mp3');
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -118,9 +125,12 @@ function handleClick(evt) {
 
 	// switch players
 	// TODO: switch currPlayer 1 <-> 2
-	if (currPlayer === 1) {
-		currPlayer++;
-	} else currPlayer--;
+	// if (currPlayer === 1) {
+	// 	currPlayer++;
+	// } else currPlayer--;
+	currPlayer === 1 ? currPlayer++ : currPlayer--;
+
+	myPlay('drip.wav');
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */

@@ -19,22 +19,25 @@
 	bottom: 10%;
 	left: 10%;
 	animation-name: drop;
-	animation-duration: 1s;
-	transition-timing-function: cubic-bezier(1.000, 0.860, 0.000, 1.000);
+	animation-duration: 0.5s;
+	transition-timing-function: jump-end;
 }
 
 @keyframes drop {
 	0% {
 		bottom: 1000%;
+		height: 80%;
 	}
-	80% {
-		bottom: 2%;
+	70% {
+		height: 80%;
 	}
-	90% {
-		bottom: 15%;
+	75% {
+		bottom: 0%;
+		height: 50%;
 	}
 	100% {
 		bottom: 10%;
+		height: 80%;
 	}
 }
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
